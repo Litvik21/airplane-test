@@ -1,10 +1,11 @@
-package com.example.airplanetest.service;
+package com.example.airplanetest.service.impl;
 
 import static org.springframework.data.mongodb.core.FindAndModifyOptions.options;
 import static org.springframework.data.mongodb.core.query.Criteria.where;
 import static org.springframework.data.mongodb.core.query.Query.query;
 
 import com.example.airplanetest.model.DatabaseSequence;
+import com.example.airplanetest.service.SequenceGeneratorService;
 import java.util.Objects;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Update;

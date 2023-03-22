@@ -12,13 +12,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class FlightScheduler {
+    private static final int TIME_INTERVAL = 1;
     private final AirplaneService service;
     private final PlaneCalculation planeCalculation;
+    private final PrintInfoService printService;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
-    public FlightScheduler(AirplaneService service, PlaneCalculation planeCalculation) {
+    public FlightScheduler(AirplaneService service, PlaneCalculation planeCalculation,
+                           PrintInfoService printService) {
         this.service = service;
         this.planeCalculation = planeCalculation;
+        this.printService = printService;
     }
 
     public void startFlights(List<AirplaneCharacteristics> characteristics,
@@ -56,8 +60,8 @@ public class FlightScheduler {
             airplane.setPosition(temporaryPoints.get(temporaryPoints.size() - 1));
 
             service.save(airplane);
-            System.out.println(temporaryPoints);
-            System.out.println("time: " + temporaryPoints.size());
+            printService.printTemporaryPoints(temporaryPoints);
+            printService.printElapsedTime(temporaryPoints.size(), TIME_INTERVAL);
         }
     }
 }
